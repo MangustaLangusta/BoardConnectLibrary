@@ -1,10 +1,10 @@
 /*
-	Board_connection_library
-	by Sergei Grigorev 
-	2024
-	
-	header BoardConnect
-	
+  Board_connection_library
+  by Sergei Grigorev 
+  2024
+  
+  header BoardConnect
+  
 */
 
 #ifndef BOARD_CONNECT_H
@@ -24,11 +24,11 @@ namespace board_connect{
 
 template <typename DataType = DefaultDataType>
 Board<DataType> MakeUartBoard(const uart::UartConnectionSettings& uart_settings = uart::UartConnectionSettings()) { 
-	return Board<DataType>(	uart_settings, uart::UartBoardConnectorFactory<DataType>()); 
+  return Board<DataType>(  uart_settings, uart::UartBoardConnectorFactory<DataType>()); 
 };
 
 
 
-}	//board_connect
+}  //board_connect
 
-#endif	//BOARD_CONNECT_H
+#endif  //BOARD_CONNECT_H

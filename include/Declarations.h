@@ -1,9 +1,9 @@
 /*
-	Board_connection_library
-	by Sergei Grigorev 
-	2024
-	
-	Declarations header
+  Board_connection_library
+  by Sergei Grigorev 
+  2024
+  
+  Declarations header
 */
 
 #ifndef DECLARATIONS_H
@@ -32,13 +32,13 @@
 
 
 namespace board_connect{
-	
+  
 //For debug and testing
 using std::cout;
 using std::endl;
 using std::thread;
 using std::atomic_bool;
-	
+  
 using DefaultDataType = std::string;
 
 using Handler = HANDLE;
@@ -56,68 +56,68 @@ using IBoardConnector_up = std::unique_ptr< IBoardConnector<DataType> >;
 enum class ConnectionStatus_t { UNDEFINED, CONNECTED_OK, DISCONNECTED_OK, CONNECTION_LOST, CONNECTION_ERROR, OTHER_ERROR, CONNECTION_IN_PROGRESS, DISCONNECTION_IN_PROGRESS };
 
 
-/*	--------------------------------------------------------------------------------------------------------------------
-			constants for WinApi
-		--------------------------------------------------------------------------------------------------------------------
+/*  --------------------------------------------------------------------------------------------------------------------
+      constants for WinApi
+    --------------------------------------------------------------------------------------------------------------------
 */
 const COMMTIMEOUTS DEFAULT_COMMTIMEOUTS{ 
-	MAXDWORD,		// ReadIntervalTimeout
-	0,					// ReadTotalTimeoutMultiplier
-	0,					// ReadTotalTimeoutConstant
-	0,					// WriteTotalTimeoutMultiplier
-	0						// WriteTotalTimeoutConstant
+  MAXDWORD,    // ReadIntervalTimeout
+  0,          // ReadTotalTimeoutMultiplier
+  0,          // ReadTotalTimeoutConstant
+  0,          // WriteTotalTimeoutMultiplier
+  0            // WriteTotalTimeoutConstant
 };
 
 
-/*	--------------------------------------------------------------------------------------------------------------------
-			ConnectionStatus
-		--------------------------------------------------------------------------------------------------------------------
+/*  --------------------------------------------------------------------------------------------------------------------
+      ConnectionStatus
+    --------------------------------------------------------------------------------------------------------------------
 */
 struct ConnectionStatus{
-	
-	//fields
-	const ConnectionStatus_t value;
-	
-	operator int() const { return static_cast<int>(value);	}
-	bool operator==(const ConnectionStatus_t oth) { return (value == oth); }
+  
+  //fields
+  const ConnectionStatus_t value;
+  
+  operator int() const { return static_cast<int>(value);  }
+  bool operator==(const ConnectionStatus_t oth) { return (value == oth); }
 
-	//ctor / dtor
-	ConnectionStatus(ConnectionStatus_t new_val) : value(new_val) {}
-	virtual ~ConnectionStatus() = default;
+  //ctor / dtor
+  ConnectionStatus(ConnectionStatus_t new_val) : value(new_val) {}
+  virtual ~ConnectionStatus() = default;
 };
 
 
-/*	--------------------------------------------------------------------------------------------------------------------
-			IConnectionSettings
-		--------------------------------------------------------------------------------------------------------------------
+/*  --------------------------------------------------------------------------------------------------------------------
+      IConnectionSettings
+    --------------------------------------------------------------------------------------------------------------------
 */
 class IConnectionSettings{
-	
+  
 public:
  virtual ~IConnectionSettings() = default;
  
 public:
-	virtual void Dump() const = 0;
+  virtual void Dump() const = 0;
 };
 
 
-/*	--------------------------------------------------------------------------------------------------------------------
-			Getting data from DataType (string by default)
-		--------------------------------------------------------------------------------------------------------------------
+/*  --------------------------------------------------------------------------------------------------------------------
+      Getting data from DataType (string by default)
+    --------------------------------------------------------------------------------------------------------------------
 */
 char* Data(DefaultDataType obj){
-	return obj.data();
+  return obj.data();
 }
 
-/*	--------------------------------------------------------------------------------------------------------------------
-			convert raw data (array of char) into DataType (to string by default)
-		--------------------------------------------------------------------------------------------------------------------
+/*  --------------------------------------------------------------------------------------------------------------------
+      convert raw data (array of char) into DataType (to string by default)
+    --------------------------------------------------------------------------------------------------------------------
 */
 DefaultDataType Data(char* raw_arr, int size){
-	return DefaultDataType(raw_arr, size);
+  return DefaultDataType(raw_arr, size);
 }
 
 
-}	//board_connect
+}  //board_connect
 
-#endif	//DECLARATIONS_H
+#endif  //DECLARATIONS_H
